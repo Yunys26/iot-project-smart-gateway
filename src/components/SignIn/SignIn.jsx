@@ -32,16 +32,28 @@ function Copyright() {
 
 export default function SignIn() {
 
+  const [dataForm, setDataFrom] = React.useState([]);
+
   const classes = useStyles();
 
-  const fromSignInRef = React.useRef();
+  const formSignInRef = React.useRef(null);
 
   const getDataFrom = (e) => {
     e.preventDefault();
-    Object.values(fromSignInRef.current.elements).forEach(element => {
-      console.log(element);
+    
+    let result = [];
+
+    Object.values(formSignInRef.current.elements).forEach(element => {
+      if ((element.id === 'email' || element.id === 'password') && element.nodeName === 'INPUT') {
+        result.push(element.value);
+      } else if (element.defaultValue === 'remember') {
+        result.push(element.checked);
+      }
     });
+    setDataFrom(result.splice(0, 3));
   }
+  console.log(formSignInRef)
+  console.log(dataForm);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -55,7 +67,7 @@ export default function SignIn() {
         </Typography>
         <form
           onSubmit={getDataFrom}
-          ref={fromSignInRef}
+          ref={formSignInRef}
           className={classes.form}
           noValidate
         >
