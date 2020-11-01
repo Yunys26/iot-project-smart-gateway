@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -17,6 +18,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useStyles } from './signInStyle';
 
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -32,11 +34,22 @@ function Copyright() {
 
 export default function SignIn() {
 
+  // Hook для смены url => history.push(имя куда нужно перейти то есть путь)
+  const history = useHistory();
+
+  // Состояния данных
   const [dataForm, setDataFrom] = React.useState([]);
 
+  // Стили
   const classes = useStyles();
-
+  
+  // Ссылка на форму
   const formSignInRef = React.useRef(null);
+
+  // Тут должен быть эффект componentDidMount который будет сверять каждый раз localStorage и обрабатывать его если он есть
+  React.useEffect(() => {
+    // Обновляет localStorage отсылает запросы
+  }, [])
 
   const getDataFrom = (e) => {
     e.preventDefault();
@@ -44,12 +57,16 @@ export default function SignIn() {
     let result = [];
 
     Object.values(formSignInRef.current.elements).forEach(element => {
-      if ((element.id === 'email' || element.id === 'password') && element.nodeName === 'INPUT') {
+      if ((element.id === 'login' || element.id === 'password') && element.nodeName === 'INPUT') {
         result.push(element.value);
+        element.value = '';
       } else if (element.defaultValue === 'remember') {
         result.push(element.checked);
+
       }
     });
+    // Тут должна быть функция которая кладет все даные в локал сторадж
+    // history.push("menu")
     setDataFrom(result.splice(0, 3));
   }
   console.log(formSignInRef)
@@ -76,10 +93,10 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="login"
+            label="Login"
+            name="login"
+            autoComplete="login"
             autoFocus
           />
           <TextField

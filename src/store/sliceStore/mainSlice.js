@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// запрос на проверку Логина пароля 
 const responseDataFrom = createAsyncThunk('main/responseDataFrom',
-    async () => {
-        const response = await axios.post('1121');
-        return response.data;
+    (inputLogin, inputPassword) => {
+        const response = axios.post('1121')
+            .then( res => console.log(res))
+            .catch( error => console.log(error));
+        return response;
     }
 )
 
@@ -12,7 +15,10 @@ export const mainSlice = createSlice({
     name: 'main',
 
     initialState: {
-        state: [],
+        // Данные входа если вдру понадобяться 
+        data: [],
+        // {Хранилище где будет храниться приложенная карта}
+        mock: [],
     },
 
     reducers: {
