@@ -12,6 +12,7 @@ const responseDataFrom = createAsyncThunk('main/responseDataFrom',
 )
 
 export const mainSlice = createSlice({
+    // Наименование слоая хранилища
     name: 'main',
 
     initialState: {

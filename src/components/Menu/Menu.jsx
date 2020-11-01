@@ -9,7 +9,7 @@ export default function Menu(props) {
     // Стили
     const classes = useStyles();
     // Доступ к храгилищу mock
-    const mock = useSelector(state => state.main.mock);
+    // const mock = useSelector(state => state.main.mock);
 
     return (
         <div>

@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { MainContext } from '../../context';
+// Libs
 import { useHistory } from 'react-router-dom';
 import {
   Avatar,
@@ -14,9 +17,8 @@ import {
   CssBaseline,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-
+// Style
 import { useStyles } from './signInStyle';
-
 
 
 function Copyright() {
@@ -34,6 +36,8 @@ function Copyright() {
 
 export default function SignIn() {
 
+  const { setDarkMode } = React.useContext(MainContext) 
+
   // Hook для смены url => history.push(имя куда нужно перейти то есть путь)
   const history = useHistory();
 
@@ -49,11 +53,11 @@ export default function SignIn() {
   // Тут должен быть эффект componentDidMount который будет сверять каждый раз localStorage и обрабатывать его если он есть
   React.useEffect(() => {
     // Обновляет localStorage отсылает запросы
-  }, [])
+  }, []);
 
   const getDataFrom = (e) => {
     e.preventDefault();
-    
+    setDarkMode(true)
     let result = [];
 
     Object.values(formSignInRef.current.elements).forEach(element => {
@@ -125,14 +129,14 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              {/* <Link href="#" variant="body2">
                 Forgot password?
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              {/* <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}  
+              </Link> */}
             </Grid>
           </Grid>
         </form>
