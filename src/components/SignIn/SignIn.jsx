@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { MainContext } from '../../context';
 // Libs
 import { useHistory } from 'react-router-dom';
 import {
@@ -36,8 +34,6 @@ function Copyright() {
 
 export default function SignIn() {
 
-  const { setDarkMode } = React.useContext(MainContext) 
-
   // Hook для смены url => history.push(имя куда нужно перейти то есть путь)
   const history = useHistory();
 
@@ -57,7 +53,6 @@ export default function SignIn() {
 
   const getDataFrom = (e) => {
     e.preventDefault();
-    setDarkMode(true)
     let result = [];
 
     Object.values(formSignInRef.current.elements).forEach(element => {
@@ -66,11 +61,10 @@ export default function SignIn() {
         element.value = '';
       } else if (element.defaultValue === 'remember') {
         result.push(element.checked);
-
       }
     });
     // Тут должна быть функция которая кладет все даные в локал сторадж
-    // history.push("menu")
+    history.push("menu")
     setDataFrom(result.splice(0, 3));
   }
   console.log(formSignInRef)

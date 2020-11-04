@@ -1,6 +1,6 @@
 import { combineReducers, getDefaultMiddleware, configureStore } from "@reduxjs/toolkit";
-import { mainSlice } from "./sliceStore/mainSlice";
-
+import mainSlice from './sliceStore/mainSlice';
+ 
 
 const rootReducer = combineReducers({
     main: mainSlice,
