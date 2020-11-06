@@ -1,4 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {
+    makeStyles
+} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     paper: {
@@ -19,3 +21,22 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
+
+export const textFieldLogin = {
+    variant: "outlined",
+    margin: "normal",
+    id: "login",
+    label: "Login",
+    name: "login",
+    autoComplete: "login",
+};
+
+export const textFieldPassword = {
+    variant: "outlined",
+    margin: "normal",
+    name: "password",
+    label: "Password",
+    type: "password",
+    id: "password",
+    autoComplete: "current-password",
+}

@@ -1,33 +1,40 @@
 import React from 'react';
+// Libs
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Zoom from '@material-ui/core/Zoom';
-import Fab from '@material-ui/core/Fab';
+// Material-Ui Icons
 import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
-// import { green } from '@material-ui/core/colors';
-import Box from '@material-ui/core/Box';
-import { useStyles } from './menuStyles';
-import { Paper } from '@material-ui/core';
-
+import FavoriteIcon from '@material-ui/icons/Favorite';
+// Material-Ui Components
 import {
-    Switch,
+    AppBar,
+    Tabs,
+    Tab,
+    Typography,
+    Zoom,
+    Fab,
+    Box, 
+    Paper,
     Table,
     TableHead,
     TableRow,
     TableCell,
     TableBody,
     TableFooter,
+    // Input,
+    // Switch,
+    // FormControlLabel,
+    // Slide,
 } from '@material-ui/core';
+// Hook Material-Ui
+import { useStyles } from './menuStyles';
+import { useTheme } from '@material-ui/core/styles';
+// Context App
 import { MainContext } from '../../context';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import EditIcon from '@material-ui/icons/Edit';
+// import { green } from '@material-ui/core/colors'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -46,12 +53,6 @@ function TabPanel(props) {
     );
 }
 
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
-
 function a11yProps(index) {
     return {
         id: `action-tab-${index}`,
@@ -60,16 +61,19 @@ function a11yProps(index) {
 }
 
 export default function FloatingActionButtonZoom() {
+    
     const { setDarkMode, darkMode } = React.useContext(MainContext);
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    // const [checked, setChecked] = React.useState(false);
+
 
     const handleModeTheme = (e) => {
         setDarkMode(!darkMode)
     };
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (e, newValue) => {
         setValue(newValue);
     };
 
@@ -82,6 +86,10 @@ export default function FloatingActionButtonZoom() {
         exit: theme.transitions.duration.leavingScreen,
     };
 
+    // const handleChangeTransition = () => {
+    //     setChecked((prev) => !prev);
+    // };
+
     const fabs = [
         {
             color: 'primary',
@@ -93,20 +101,20 @@ export default function FloatingActionButtonZoom() {
         {
             color: 'secondary',
             className: classes.fab,
-            icon: <FavoriteIcon onClick={handleModeTheme}/>,
+            icon: <FavoriteIcon  />,
             label: 'Edit',
         },
         {
             color: '',
             className: clsx(classes.fab, classes.fabGreen),
-            icon: <UpIcon onClick={handleModeTheme}/>,
+            icon: <UpIcon />,
             label: 'Expand',
         },
     ];
 
     return (
         <Paper
-            style={{height: '87vh'}}
+            style={{ height: '87vh' }}
             className={classes.mainBox}
         >
             {/* <Switch color="primary" size="medium" checked={darkMode} onChange={handleModeTheme} /> */}
@@ -177,7 +185,19 @@ export default function FloatingActionButtonZoom() {
                         </Table>
                     </TabPanel>
                     <TabPanel value={value} index={2} dir={theme.direction}>
-
+                        {/* <div className={classes.root}>
+                            <div className={classes.wrapper}>
+                                <FormControlLabel
+                                    control={<Switch checked={checked} onChange={handleChangeTransition} />}
+                                    label="Show"
+                                />
+                                <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
+                                    <Paper elevation={4} className={classes.paper}>
+                                        <Input />
+                                    </Paper>
+                                </Slide>
+                            </div>
+                        </div> */}
                     </TabPanel>
                 </SwipeableViews>
                 {fabs.map((fab, index) => (
@@ -199,3 +219,11 @@ export default function FloatingActionButtonZoom() {
         </Paper>
     );
 }
+
+
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};

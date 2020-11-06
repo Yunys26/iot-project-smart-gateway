@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // Style
-import { useStyles } from './signInStyle';
+import { textFieldLogin, textFieldPassword, useStyles } from './signInStyle';
 
 
 function Copyright() {
@@ -87,26 +87,16 @@ export default function SignIn() {
           noValidate
         >
           <TextField
-            variant="outlined"
-            margin="normal"
+            {...textFieldLogin}
             required
+            
             fullWidth
-            id="login"
-            label="Login"
-            name="login"
-            autoComplete="login"
             autoFocus
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            {...textFieldPassword}
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

@@ -1,9 +1,5 @@
-import {
-    makeStyles
-} from "@material-ui/core";
-import {
-    green
-} from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core";
+import { green } from "@material-ui/core/colors";
 
 // export const themeMain
 export const useStyles = makeStyles((theme) => ({
@@ -43,6 +39,25 @@ export const useStyles = makeStyles((theme) => ({
         //     border: '2px solid rgb(44, 70, 201)',
         // }
     },
-
+    root: {
+        height: 180,
+    },
+    wrapper: {
+        width: 100 + theme.spacing(2),
+    },
+    paper: {
+        zIndex: 1,
+        position: 'relative',
+        margin: theme.spacing(1),
+    },
+    svg: {
+        width: 100,
+        height: 100,
+    },
+    polygon: {
+        fill: theme.palette.common.white,
+        stroke: theme.palette.divider,
+        strokeWidth: 1,
+    },
 
 }));
