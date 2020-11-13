@@ -7,7 +7,6 @@ import SwipeableViews from 'react-swipeable-views';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Brightness7TwoToneIcon from '@material-ui/icons/Brightness7TwoTone';
 import AddCircleTwoToneIcon from '@material-ui/icons/AddCircleTwoTone';
-import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 // Material-Ui Components
 import {
     AppBar,
@@ -26,12 +25,12 @@ import {
     TableFooter,
     Input,
     Switch,
-    FormControlLabel,
+    FormControlLabel,   
     Slide,
     Collapse,
 } from '@material-ui/core';
 // Hook Material-Ui
-import { useStyles } from './menuStyles';
+import { useStyles } from './menu-style';
 import { useTheme } from '@material-ui/core/styles';
 // Context App
 import { MainContext } from '../../context';
@@ -106,12 +105,6 @@ export default function FloatingActionButtonZoom() {
             icon: <AddCircleTwoToneIcon onClick={handleClickRegistration} />,
             label: 'Expand',
         },
-        {
-            color: '',
-            className: clsx(classes.fab, classes.fabGreen),
-            icon: <HomeSharpIcon />,
-            label: 'Expand',
-        },
     ];
 
     return (
@@ -132,7 +125,7 @@ export default function FloatingActionButtonZoom() {
                     >
                         <Tab label="Пользователи" {...a11yProps(0)} />
                         <Tab label="Активные пользователи" {...a11yProps(1)} />
-                        <Tab label="Регистрация" {...a11yProps(2)} />
+                        <Tab label="Меню" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews
@@ -187,7 +180,7 @@ export default function FloatingActionButtonZoom() {
                         </Table>
                     </TabPanel>
                     <TabPanel value={value} index={2} dir={theme.direction}>
-                        <Collapse in={checked}>
+                        <Collapse timeout={3000} in={checked}>
                             <Registration />   
                         </Collapse>
                     </TabPanel>
