@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import SwipeableViews from 'react-swipeable-views';
 // Material-Ui Icons
-import AddIcon from '@material-ui/icons/Add';
-import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Brightness7TwoToneIcon from '@material-ui/icons/Brightness7TwoTone';
+import AddCircleTwoToneIcon from '@material-ui/icons/AddCircleTwoTone';
+import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 // Material-Ui Components
 import {
     AppBar,
@@ -23,16 +24,18 @@ import {
     TableCell,
     TableBody,
     TableFooter,
-    // Input,
-    // Switch,
-    // FormControlLabel,
-    // Slide,
+    Input,
+    Switch,
+    FormControlLabel,
+    Slide,
+    Collapse,
 } from '@material-ui/core';
 // Hook Material-Ui
 import { useStyles } from './menuStyles';
 import { useTheme } from '@material-ui/core/styles';
 // Context App
 import { MainContext } from '../../context';
+import Registration from './Registration/Registration';
 // import EditIcon from '@material-ui/icons/Edit';
 // import { green } from '@material-ui/core/colors'
 
@@ -63,39 +66,32 @@ function a11yProps(index) {
 export default function FloatingActionButtonZoom() {
     
     const { setDarkMode, darkMode } = React.useContext(MainContext);
+
     const classes = useStyles();
     const theme = useTheme();
+
     const [value, setValue] = React.useState(0);
-    // const [checked, setChecked] = React.useState(false);
+    const [checked, setChecked] = React.useState(false);
 
+    const handleModeTheme = React.useCallback((event) => setDarkMode(!darkMode), [darkMode]) 
 
-    const handleModeTheme = (e) => {
-        setDarkMode(!darkMode)
-    };
+    const handleChange = React.useCallback((event, newValue) => setValue(newValue), []);
 
-    const handleChange = (e, newValue) => {
-        setValue(newValue);
-    };
+    const handleChangeIndex = React.useCallback((index) => setValue(index), []);
 
-    const handleChangeIndex = (index) => {
-        setValue(index);
-    };
+    const handleClickRegistration = React.useCallback((event) => setChecked(!checked), [checked])
 
     const transitionDuration = {
         enter: theme.transitions.duration.enteringScreen,
         exit: theme.transitions.duration.leavingScreen,
     };
 
-    // const handleChangeTransition = () => {
-    //     setChecked((prev) => !prev);
-    // };
-
     const fabs = [
         {
             color: 'primary',
             className: classes.fab,
             // Реализовать смену темы на разные кнопки
-            icon: <AddIcon onClick={handleModeTheme} />,
+            icon: <Brightness7TwoToneIcon onClick={handleModeTheme} />,
             label: 'Add',
         },
         {
@@ -107,7 +103,13 @@ export default function FloatingActionButtonZoom() {
         {
             color: '',
             className: clsx(classes.fab, classes.fabGreen),
-            icon: <UpIcon />,
+            icon: <AddCircleTwoToneIcon onClick={handleClickRegistration} />,
+            label: 'Expand',
+        },
+        {
+            color: '',
+            className: clsx(classes.fab, classes.fabGreen),
+            icon: <HomeSharpIcon />,
             label: 'Expand',
         },
     ];
@@ -185,19 +187,9 @@ export default function FloatingActionButtonZoom() {
                         </Table>
                     </TabPanel>
                     <TabPanel value={value} index={2} dir={theme.direction}>
-                        {/* <div className={classes.root}>
-                            <div className={classes.wrapper}>
-                                <FormControlLabel
-                                    control={<Switch checked={checked} onChange={handleChangeTransition} />}
-                                    label="Show"
-                                />
-                                <Slide direction="up" in={checked} mountOnEnter unmountOnExit>
-                                    <Paper elevation={4} className={classes.paper}>
-                                        <Input />
-                                    </Paper>
-                                </Slide>
-                            </div>
-                        </div> */}
+                        <Collapse in={checked}>
+                            <Registration />   
+                        </Collapse>
                     </TabPanel>
                 </SwipeableViews>
                 {fabs.map((fab, index) => (
