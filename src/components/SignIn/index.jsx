@@ -17,15 +17,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // Components
 import Copyright from "./Copyright";
 // Style & attribut's
-import { buttonSignIn, textFieldLogin, textFieldPassword, useStyles } from './signInStyle';
+import { buttonSignIn, textFieldLogin, textFieldPassword, useStyles } from './signIn-style';
 
 export default function SignIn() {
 
   // Hook для смены url => history.push(имя куда нужно перейти то есть путь)
   const history = useHistory();
-
-  // Состояния данных
-  const [dataForm, setDataFrom] = React.useState([]);
 
   // Стили
   const classes = useStyles();
@@ -37,32 +34,26 @@ export default function SignIn() {
   const handleChangeLogin = React.useCallback((event) => setLogin(event.target.value));
   const handleChangePassword = React.useCallback((event) => setPassword(event.target.value));
   const handleClickRemeberMe = React.useCallback((event) => setRemeberMe(!remeberMe));
-  // // Ссылка на форму
-  // const formSignInRef = React.useRef(null);
+  const handleSubmitFormReg = React.useCallback((event) => {
+    event.preventDefault();
+    const result = JSON.stringify({
+      login: login,
+      password: password,
+    });
 
-  // // Тут должен быть эффект componentDidMount который будет сверять каждый раз localStorage и обрабатывать его если он есть
-  // React.useEffect(() => {
-  //   // Обновляет localStorage отсылает запросы
-  // }, []);
+    if (remeberMe === true) {
+      localStorage.setItem('regUser', result)
+      history.push('/menu');
+    } else if (remeberMe === false) {
+      history.push('/menu');
+    }
+  })
 
-  // const getDataFrom = (event) => {
-  //   event.preventDefault();
-  //   let result = [];
-
-  //   Object.values(formSignInRef.current.elements).forEach(element => {
-  //     if ((element.id === 'login' || element.id === 'password') && element.nodeName === 'INPUT') {
-  //       result.push(element.value);
-  //       element.value = '';
-  //     } else if (element.defaultValue === 'remember') {
-  //       result.push(element.checked);
-  //     }
-  //   });
-  //   // Тут должна быть функция которая кладет все даные в локал сторадж
-  //   history.push("menu")
-  //   setDataFrom(result.splice(0, 3));
-  // }
-  // console.log(formSignInRef)
-  // console.log(dataForm);
+  React.useEffect(() => {
+    if ( localStorage.getItem('regUser') !== null ) {
+      history.push('/menu')
+    }
+  }, [])
 
   return (
     <Container component="main" maxWidth="xs">
@@ -75,8 +66,7 @@ export default function SignIn() {
           Sign in <b>DedSec</b>
         </Typography>
         <form
-          // onSubmit={getDataFrom}
-          // ref={formSignInRef}
+          onSubmit={handleSubmitFormReg}
           className={classes.form}
           noValidate
         >
@@ -124,66 +114,5 @@ export default function SignIn() {
         <Copyright />
       </Box>
     </Container>
-    // <Container component="main" maxWidth="xs">
-    //   <CssBaseline />
-    //   <div className={classes.paper}>
-    //     <Avatar className={classes.avatar}>
-    //       <LockOutlinedIcon />
-    //     </Avatar>
-    //     <Typography component="h1" variant="h5">
-    //       Sign in <b>DedSec</b>
-    //     </Typography>
-    //     <form
-    //       onSubmit={getDataFrom}
-    //       ref={formSignInRef}
-    //       className={classes.form}
-    //       noValidate
-    //     >
-    //       <TextField
-    //         onChange={(e) => console.log(e.target.value)}
-    //         {...textFieldLogin}
-    //         required
-    //         fullWidth
-    //         autoFocus
-    //       />
-    //       <TextField
-    //         onChange={(e) => console.log(e.target.value)}
-    //         {...textFieldPassword}
-    //         required
-    //         fullWidth
-    //       />
-    //       <FormControlLabel
-    //         control={
-    //           <Checkbox value="remember" color="primary"/>
-    //         }
-    //         label="Remember me"
-    //       />
-    //       <Button
-    //         type="submit"
-    //         fullWidth
-    //         variant="contained"
-    //         color="primary"
-    //         className={classes.submit}
-    //       >
-    //         Sign In
-    //         </Button>
-    //       <Grid container>
-    //         <Grid item xs>
-    //           {/* <Link href="#" variant="body2">
-    //             Forgot password?
-    //           </Link> */}
-    //         </Grid>
-    //         <Grid item>
-    //           {/* <Link href="#" variant="body2">
-    //             {"Don't have an account? Sign Up"}
-    //           </Link> */}
-    //         </Grid>
-    //       </Grid>
-    //     </form>
-    //   </div>
-    //   <Box mt={8}>
-    //     <Copyright />
-    //   </Box>
-    // </Container>
   );
 }
