@@ -23,10 +23,6 @@ import {
     TableCell,
     TableBody,
     TableFooter,
-    Input,
-    Switch,
-    FormControlLabel,   
-    Slide,
     Collapse,
 } from '@material-ui/core';
 // Hook Material-Ui
@@ -34,9 +30,11 @@ import { useStyles } from './menu-style';
 import { useTheme } from '@material-ui/core/styles';
 // Context App
 import { MainContext } from '../../context';
-import Registration from './Registration/Registration';
+// Component
+import MenuPanel from './MenuPanel';
+import TableUsers from '../Table';
 // import EditIcon from '@material-ui/icons/Edit';
-// import { green } from '@material-ui/core/colors'
+// import { green } from '@material-ui/core/colors';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -134,56 +132,19 @@ export default function FloatingActionButtonZoom() {
                     onChangeIndex={handleChangeIndex}
                 >
                     <TabPanel value={value} index={0} dir={theme.direction}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Dessert (100g serving)</TableCell>
-                                    <TableCell align="right">Calories</TableCell>
-                                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                <TableRow>
-
-                                </TableRow>
-                            </TableBody>
-                            <TableFooter>
-                                <TableRow>
-
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
+                        <TableUsers />
                     </TabPanel>
+
                     <TabPanel value={value} index={1} dir={theme.direction}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Dessert (100g serving)</TableCell>
-                                    <TableCell align="right">Calories</TableCell>
-                                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                <TableRow>
-
-                                </TableRow>
-                            </TableBody>
-                            <TableFooter>
-                                <TableRow>
-
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
+                        <TableUsers />
                     </TabPanel>
+
                     <TabPanel value={value} index={2} dir={theme.direction}>
                         <Collapse timeout={3000} in={checked}>
-                            <Registration />   
+                            <MenuPanel />
                         </Collapse>
                     </TabPanel>
+                    
                 </SwipeableViews>
                 {fabs.map((fab, index) => (
                     <Zoom

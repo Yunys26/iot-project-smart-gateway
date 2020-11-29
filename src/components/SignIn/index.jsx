@@ -15,22 +15,10 @@ import {
   CssBaseline,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// Components
+import Copyright from "./Copyright";
 // Style
 import { textFieldLogin, textFieldPassword, useStyles } from './signInStyle';
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 export default function SignIn() {
 
@@ -42,7 +30,7 @@ export default function SignIn() {
 
   // Стили
   const classes = useStyles();
-  
+
   // Ссылка на форму
   const formSignInRef = React.useRef(null);
 
@@ -51,8 +39,8 @@ export default function SignIn() {
     // Обновляет localStorage отсылает запросы
   }, []);
 
-  const getDataFrom = (e) => {
-    e.preventDefault();
+  const getDataFrom = (event) => {
+    event.preventDefault();
     let result = [];
 
     Object.values(formSignInRef.current.elements).forEach(element => {
@@ -71,63 +59,62 @@ export default function SignIn() {
   console.log(dataForm);
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form
-          onSubmit={getDataFrom}
-          ref={formSignInRef}
-          className={classes.form}
-          noValidate
-        >
-          <TextField
-            {...textFieldLogin}
-            required
-            
-            fullWidth
-            autoFocus
-          />
-          <TextField
-            {...textFieldPassword}
-            required
-            fullWidth
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in <b>DedSec</b>
+          </Typography>
+          <form
+              onSubmit={getDataFrom}
+              ref={formSignInRef}
+              className={classes.form}
+              noValidate
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              {/* <Link href="#" variant="body2">
+            <TextField
+                {...textFieldLogin}
+                required
+                fullWidth
+                autoFocus
+            />
+            <TextField
+                {...textFieldPassword}
+                required
+                fullWidth
+            />
+            <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+            />
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                {/* <Link href="#" variant="body2">
                 Forgot password?
               </Link> */}
-            </Grid>
-            <Grid item>
-              {/* <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}  
+              </Grid>
+              <Grid item>
+                {/* <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
               </Link> */}
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
   );
 }

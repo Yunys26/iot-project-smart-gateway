@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-// import { green } from "@material-ui/core/colors";
+import { green, purple, blue } from "@material-ui/core/colors";
 
 export const useRegistrationStyle = makeStyles((theme) => ({
     root: {
@@ -11,9 +11,15 @@ export const useRegistrationStyle = makeStyles((theme) => ({
         flexDirection: "column",
         overflowY: 'hidden',
         overflowX: 'hidden',
-        padding: theme.spacing(10),
-        display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center', 
+        alignItems: 'center',
+        cursor: 'pointer',
+        '&:hover': {
+            boxShadow: 'inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1)',
+        }
+    },
+    blockPanelMenu: {
+        width: '100%',
+        padding: theme.spacing(10),
     }
 }));
