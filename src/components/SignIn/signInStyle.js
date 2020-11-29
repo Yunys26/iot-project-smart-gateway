@@ -1,6 +1,4 @@
-import {
-    makeStyles
-} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     paper: {
@@ -21,22 +19,34 @@ export const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
-
+// Input Login
 export const textFieldLogin = {
-    variant: "outlined",
-    margin: "normal",
-    id: "login",
-    label: "Login",
-    name: "login",
-    autoComplete: "login",
+    variant: 'outlined',
+    margin: 'normal',
+    id: 'login',
+    label: 'Login',
+    name: 'login',
+    autoComplete: 'login',
+    required: true,
+    fullWidth: true,
+    autoFocus: true,
 };
-
+// Input Password
 export const textFieldPassword = {
-    variant: "outlined",
-    margin: "normal",
-    name: "password",
-    label: "Password",
-    type: "password",
-    id: "password",
-    autoComplete: "current-password",
+    variant: 'outlined',
+    margin: 'normal',
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    id: 'password',
+    autoComplete: 'current-password',
+    required: true,
+    fullWidth: true,
+}
+// Button SigIn
+export const buttonSignIn = {
+    type: 'submit',
+    fullWidth: true,
+    variant: 'contained',
+    color: 'primary',
 }

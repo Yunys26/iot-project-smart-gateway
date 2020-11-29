@@ -17,12 +17,6 @@ import {
     Fab,
     Box, 
     Paper,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    TableFooter,
     Collapse,
 } from '@material-ui/core';
 // Hook Material-Ui
@@ -70,13 +64,13 @@ export default function FloatingActionButtonZoom() {
     const [value, setValue] = React.useState(0);
     const [checked, setChecked] = React.useState(false);
 
-    const handleModeTheme = React.useCallback((event) => setDarkMode(!darkMode), [darkMode]) 
+    const handleModeTheme = React.useCallback((event) => setDarkMode(!darkMode)) 
 
-    const handleChange = React.useCallback((event, newValue) => setValue(newValue), []);
+    const handleChange = React.useCallback((event, newValue) => setValue(newValue));
 
-    const handleChangeIndex = React.useCallback((index) => setValue(index), []);
+    const handleChangeIndex = React.useCallback((index) => setValue(index));
 
-    const handleClickRegistration = React.useCallback((event) => setChecked(!checked), [checked])
+    const handleClickRegistration = React.useCallback((event) => setChecked(!checked))
 
     const transitionDuration = {
         enter: theme.transitions.duration.enteringScreen,

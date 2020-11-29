@@ -1,6 +1,9 @@
 import React from 'react';
+// Componets UI
 import { Button, Grid, Paper } from '@material-ui/core';
+// Style
 import { useRegistrationStyle } from './registration-style';
+// Icons
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import SecurityIcon from '@material-ui/icons/Security';
