@@ -1,8 +1,10 @@
 
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import {
+  Modal,
+  Backdrop,
+  Fade
+} from '@material-ui/core';
 import { useStyles } from '../ModalRegUsers/style';
 import { useSelector } from 'react-redux';
 import { changeModalInfoSystemState } from '../../../store/sliceStore/modalsSlice';

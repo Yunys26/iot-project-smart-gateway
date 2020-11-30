@@ -5,6 +5,7 @@ import { Button, Grid, Paper } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DvrIcon from '@material-ui/icons/Dvr';
+// Reducers & actions
 import { changeModalInfoSystemState } from '../../../store/sliceStore/modalsSlice';
 
 export default function FooterPanel({ classes, dispatch }) {
