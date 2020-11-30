@@ -50,10 +50,11 @@ export default function SignIn() {
   })
 
   React.useEffect(() => {
+    console.log(1)
     if ( localStorage.getItem('regUser') !== null ) {
       history.push('/menu')
     }
-  }, [])
+  }, [history])
 
   return (
     <Container component="main" maxWidth="xs">
