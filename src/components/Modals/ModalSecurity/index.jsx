@@ -18,9 +18,7 @@ export default function ModalSecurity ({ dispatch }) {
 
     const modalState = useSelector(state => state.modals.modalsSecurityStore);
 
-    const handleClose = () => {
-        dispatch(changeModalSecurityState(false));
-    };
+    const handleClose = () => dispatch(changeModalSecurityState(false));
 
     return (
         <React.Fragment>

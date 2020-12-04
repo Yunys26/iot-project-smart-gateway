@@ -6,21 +6,23 @@ import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DvrIcon from '@material-ui/icons/Dvr';
 // Reducers & actions
-import { changeModalInfoSystemState } from '../../../store/sliceStore/modalsSlice';
+import { changeModalUserAdminState, changeModalInfoSystemState, changeModalQuitState } from '../../../store/sliceStore/modalsSlice';
 
 export default function FooterPanel({ classes, dispatch }) {
 
-    const handleClickOpenInfoSystemModal = React.useCallback((event) => {
-        dispatch(changeModalInfoSystemState(true))
-    });
+    const handleClickOpenAdminUserModal = React.useCallback((event) => dispatch(changeModalUserAdminState(true)));
+    
+    const handleClickOpenInfoSystemModal = React.useCallback((event) => dispatch(changeModalInfoSystemState(true)));
+
+    const handleClickOpenModalQuit = React.useCallback((event) => dispatch(changeModalQuitState(true)));
 
     return (
         <React.Fragment>
             <Grid container item xs={12} xl={12} sm={12} md={12} lg={12} spacing={5}>
                 <Grid item xs={4} xl={4} sm={4} md={4} lg={4}>
                     <Paper className={classes.paper}>
-                        <Button className={classes.blockPanelMenu}>
-                            <PersonIcon fontSize="large" />Пользователи
+                        <Button onClick={handleClickOpenAdminUserModal} className={classes.blockPanelMenu}>
+                            <PersonIcon fontSize="large" /> Пользователи
                             </Button>
                     </Paper>
                 </Grid>
@@ -33,7 +35,7 @@ export default function FooterPanel({ classes, dispatch }) {
                 </Grid>
                 <Grid item xs={4} xl={4} sm={4} md={4} lg={4}>
                     <Paper className={classes.paper}>
-                        <Button className={classes.blockPanelMenu}>
+                        <Button onClick={handleClickOpenModalQuit} className={classes.blockPanelMenu}>
                             <ExitToAppIcon fontSize="large" /> Выход
                             </Button>
                     </Paper>

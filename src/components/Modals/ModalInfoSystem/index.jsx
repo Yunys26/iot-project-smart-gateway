@@ -16,9 +16,7 @@ export default function ModalInfoSystem({ dispatch }) {
 
   const modalState = useSelector(state => state.modals.modalInfoSystemStore);
 
-  const handleClose = () => {
-    dispatch(changeModalInfoSystemState(false));
-  };
+  const handleClose = () => dispatch(changeModalInfoSystemState(false));
 
   return (
     <Modal

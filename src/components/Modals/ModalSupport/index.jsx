@@ -16,11 +16,9 @@ export default function ModalSupport ({ dispatch }) {
 
     const classes = useStyles();
 
-    const modalState = useSelector(state => state.modals.modalsSupport);
+    const modalState = useSelector(state => state.modals.modalsSupportStore);
 
-    const handleClose = () => {
-        dispatch(changeModalSupportState(false));
-    };
+    const handleClose = () => dispatch(changeModalSupportState(false));
 
     return (
         <React.Fragment>
