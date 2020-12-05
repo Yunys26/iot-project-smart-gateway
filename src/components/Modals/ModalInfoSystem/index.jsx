@@ -5,7 +5,7 @@ import {
   Backdrop,
   Fade
 } from '@material-ui/core';
-import { useStyles } from '../ModalRegUsers/style';
+import { useStyles } from './style';
 import { useSelector } from 'react-redux';
 import { changeModalInfoSystemState } from '../../../store/sliceStore/modalsSlice';
 
