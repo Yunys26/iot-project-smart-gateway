@@ -2,9 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // запрос на проверку Логина пароля 
-const responseDataFrom = createAsyncThunk('main/responseDataFrom',
+export const responseDataFrom = createAsyncThunk('main/responseDataFrom',
     (inputLogin, inputPassword) => {
-        const response = axios.post('1121')
+        const response = axios.post('https://gavnishe.tk/v1/iot/Securities/login', {
+            body: {
+                login: inputLogin,
+                password: inputPassword
+            }
+        })
             .then( res => console.log(res))
             .catch( error => console.log(error));
         return response;
@@ -17,9 +22,10 @@ export const mainSlice = createSlice({
 
     initialState: {
         // Данные входа если вдру понадобяться 
-        data: [],
+        dataFormSignIn: null,
         // {Хранилище где будет храниться приложенная карта}
         mock: [],
+        token: null,
     },
 
     reducers: {
@@ -28,13 +34,14 @@ export const mainSlice = createSlice({
 
     extraReducers: {
         [responseDataFrom.fulfilled]: (state, action) => {
-
+            state.dataFormSignIn = 'next';
+            state.token = action.payload.data.token;
         },
-        [responseDataFrom.rejected]: (state, action) => {
-
+        [responseDataFrom.pending]: (state,) => {
+            state.dataFormSignIn = 'loading';
         },
-        [responseDataFrom.pending]: (state, action) => {
-
+        [responseDataFrom.rejected]: (state) => {
+            state.dataFormSignIn = 'error';
         },
     },
 });
