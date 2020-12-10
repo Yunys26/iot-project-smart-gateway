@@ -46,21 +46,13 @@ export default function SignIn() {
   const handleChangeLogin = React.useCallback((event) => setLogin(event.target.value));
   const handleChangePassword = React.useCallback((event) => setPassword(event.target.value));
   const handleClickRemeberMe = React.useCallback((event) => setRemeberMe(!remeberMe));
-  
   // Проверка на сохранение данных или нет
   const handleSubmitFormReg = React.useCallback((event) => {
-    event.preventDefault();
-    const result = JSON.stringify({
-      login: login,
-      password: password,
-    });
-    
-    if (remeberMe === true) {
-      localStorage.setItem('regUser', result)
-      history.push('/menu');
-    } else if (remeberMe === false) {
-      history.push('/menu');
-    }
+    event.preventDefault()
+    dispatch(responseDataFrom([login, password]));
+    setLogin('');
+    setPassword('');
+    setRemeberMe(false);
   })
 
   const conditionsIcons = React.useCallback(() => {
@@ -73,14 +65,28 @@ export default function SignIn() {
     }
     return <LockOutlinedIcon />
   }, [dataFormSignIn]);
-  
+
+  React.useEffect(() => {
+    console.log(1)
+    const result = JSON.stringify({
+      login: login,
+      password: password,
+    });
+    
+    if (remeberMe === true && dataFormSignIn === 'next') {
+      localStorage.setItem('regUser', result)
+      history.push('/menu');
+    } else if (remeberMe === false && dataFormSignIn === 'next') {
+      history.push('/menu');
+    }
+  }, [dataFormSignIn])
+
   // Проверка на наличие даных в local
-  // React.useEffect(() => {
-  //   console.log(1)
-  //   if ( localStorage.getItem('regUser') !== null ) {
-  //     history.push('/menu')
-  //   }
-  // }, [history])
+  React.useEffect(() => {
+    if ( localStorage.getItem('regUser') !== null ) {
+      history.push('/menu')
+    } 
+  }, [history])
 
   return (
     <Container component="main" maxWidth="xs">
@@ -93,11 +99,7 @@ export default function SignIn() {
           Sign in <b>DedSec</b>
         </Typography>
         <form
-          // onSubmit={handleSubmitFormReg}
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(responseDataFrom(login, password))}
-          }
+          onSubmit={handleSubmitFormReg}
           className={classes.form}
           noValidate
         >
@@ -127,18 +129,6 @@ export default function SignIn() {
           >
             { ( dataFormSignIn === 'loading' && <CircularProgress color="secondary" /> ) || 'Sign In'}
           </Button>
-          <Grid container>
-            <Grid item xs>
-              {/* <Link href="#" variant="body2">
-              Forgot password?
-            </Link> */}
-            </Grid>
-            <Grid item>
-              {/* <Link href="#" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link> */}
-            </Grid>
-          </Grid>
         </form>
       </div>
       { 

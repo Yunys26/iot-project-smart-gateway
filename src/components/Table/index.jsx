@@ -7,11 +7,11 @@ import TableHeadUsers from './TableHeadUsers';
 import TableBodyUsers from './TableBodyUsers';
 
 
-export default function TableUsers (props) {
+export default function TableUsers ({ data }) {
     return (
         <Table>
             <TableHeadUsers />
-            <TableBodyUsers />
+            <TableBodyUsers data={data}/>
         </Table>
     );
 }

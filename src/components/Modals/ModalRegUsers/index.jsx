@@ -33,6 +33,7 @@ export default function ModalRegUsers({ dispatch }) {
     >
       <Fade in={modalState}>
         <div className={classes.paper}>
+          {/* DataPicker */}
           <h2 id="transition-modal-title">Modal Registration</h2>
           <p id="transition-modal-description">Registration User</p>
         </div>

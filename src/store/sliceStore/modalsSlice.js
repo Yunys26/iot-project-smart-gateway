@@ -1,4 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const responseAddAdmin = createAsyncThunk('main/responseAddAdmin', 
+    ([login, password, token]) => {
+        const data = JSON.stringify({
+            login: login,
+            password: password
+        })
+
+        const config = {
+            method: 'POST',
+            url: 'https://gavnishe.tk/v1/iot/securities/create',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        const response = axios(config)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        console.log(response)
+    }
+)
 
 const modalsSlice = createSlice({
     name: 'modals',
@@ -56,7 +81,15 @@ const modalsSlice = createSlice({
     },
 
     extraReducers: {
-
+        [responseAddAdmin.fulfilled]: (state) => {
+            console.log('221')
+        },
+        [responseAddAdmin.pending]: (state, ) => {
+            console.log('223')
+        },
+        [responseAddAdmin.rejected]: (state) => {
+            console.log('2224')
+        },
     }
 
 })

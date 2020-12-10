@@ -5,10 +5,38 @@ import {
     TableRow,
 } from '@material-ui/core'
 
-export default function TableBodyUsers(props) {
+import { useDispatch, useSelector } from 'react-redux'
+import { concatsArrData } from '../../store/sliceStore/mainSlice';
+
+export default function TableBodyUsers({ data }) {
+
+    // const con = useSelector(state => state.main.con)
+
+    // const dispatch = useDispatch();
+
+    // React.useEffect(() => {
+    //     (data === undefined && '') || dispatch(concatsArrData(data))
+    // }, [data])
+
+    // console.log(con)
+
     return (
         <TableBody>
-            <TableRow>
+            {(data === undefined && '') || data.map((el) => {
+                return (
+                    <TableRow>
+                        <TableCell>{el.id}</TableCell>
+                        <TableCell>{el.name}</TableCell>
+                        <TableCell>{el.surname}</TableCell>
+                        <TableCell>{el.position}</TableCell>
+                        <TableCell>{el.gender}</TableCell>
+                        <TableCell>{el.birthday}</TableCell>
+                        <TableCell>{el.card_id}</TableCell>
+                        <TableCell>{el.inside}</TableCell>
+                    </TableRow>
+                )
+            })}
+            {/* <TableRow>
                 <TableCell>1</TableCell>
                 <TableCell>Алиев</TableCell>
                 <TableCell>Юнус</TableCell>
@@ -27,7 +55,7 @@ export default function TableBodyUsers(props) {
                 <TableCell>30.01.1999</TableCell>
                 <TableCell>11912</TableCell>
                 <TableCell>Да</TableCell>
-            </TableRow>
+            </TableRow> */}
         </TableBody>
     );
 }

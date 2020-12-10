@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import SwipeableViews from 'react-swipeable-views';
+import { useSelector, useDispatch } from 'react-redux';
 // Material-Ui Icons
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Brightness7TwoToneIcon from '@material-ui/icons/Brightness7TwoTone';
@@ -27,6 +28,7 @@ import { MainContext } from '../../context';
 // Component
 import MenuPanel from './MenuPanel';
 import TableUsers from '../Table';
+import { responseDataMock } from '../../store/sliceStore/mainSlice';
 // import EditIcon from '@material-ui/icons/Edit';
 // import { green } from '@material-ui/core/colors';
 
@@ -61,6 +63,12 @@ export default function FloatingActionButtonZoom() {
     const classes = useStyles();
     const theme = useTheme();
 
+    const dispatch = useDispatch();
+
+    const token = useSelector(state => state.main.token);
+
+    const mock = useSelector(state => state.main.mock);
+
     const [value, setValue] = React.useState(0);
     const [checked, setChecked] = React.useState(false);
 
@@ -71,6 +79,12 @@ export default function FloatingActionButtonZoom() {
     const handleChangeIndex = React.useCallback((index) => setValue(index));
 
     const handleClickRegistration = React.useCallback((event) => setChecked(!checked))
+
+    React.useEffect(() => {
+        setInterval(() => {
+            dispatch(responseDataMock(token))
+        }, 2000)
+    }, [token])
 
     const transitionDuration = {
         enter: theme.transitions.duration.enteringScreen,
@@ -126,11 +140,11 @@ export default function FloatingActionButtonZoom() {
                     onChangeIndex={handleChangeIndex}
                 >
                     <TabPanel value={value} index={0} dir={theme.direction}>
-                        <TableUsers />
+                        <TableUsers data={mock}/>
                     </TabPanel>
 
                     <TabPanel value={value} index={1} dir={theme.direction}>
-                        <TableUsers />
+                        <TableUsers data={mock}/>
                     </TabPanel>
 
                     <TabPanel value={value} index={2} dir={theme.direction}>

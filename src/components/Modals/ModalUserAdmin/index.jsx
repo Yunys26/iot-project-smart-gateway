@@ -21,15 +21,33 @@ import {
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useStyles } from './style';
 import { useSelector } from 'react-redux';
-import { changeModalUserAdminState } from '../../../store/sliceStore/modalsSlice';
+import { changeModalUserAdminState, responseAddAdmin } from '../../../store/sliceStore/modalsSlice';
 
 export default function ModalUserAdmin({ dispatch }) {
 
     const classes = useStyles();
 
+    const token = useSelector(state => state.main.token);
+
     const modalState = useSelector(state => state.modals.modalsUserAdminStore);
 
+    const [login, setLogin] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    const handleChangeLogin = React.useCallback((event) => setLogin(event.target.value));
+    const handleChangePassword = React.useCallback((event) => setPassword(event.target.value));
+
+
     const handleClose = () => dispatch(changeModalUserAdminState(false));
+
+    const handleClickFormClear = React.useCallback((event) => {
+        setLogin('');
+        setPassword('');
+    })
+
+    const handleClickAddNewUser = React.useCallback((event) => {
+        dispatch(responseAddAdmin([login, password, token]))
+    })
 
     return (
         <Modal
@@ -63,7 +81,8 @@ export default function ModalUserAdmin({ dispatch }) {
                                         <TextField
                                             label='Логин'
                                             variant='filled'
-                                            onChange={(e) => console.log(e.target.value)}
+                                            onChange={handleChangeLogin}
+                                            value={login}
                                             autoFocus
                                         >
                                         </TextField>
@@ -76,14 +95,24 @@ export default function ModalUserAdmin({ dispatch }) {
                                             label='Пароль'
                                             type='password'
                                             variant='filled'
-                                            onChange={(e) => console.log(e.target.value)}
+                                            onChange={handleChangePassword}
+                                            value={password}
                                         >
                                         </TextField>
                                     </Tooltip>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Button variant="outlined">Сбросить</Button>
-                                    <Button variant="outlined" color="primary" className={classes.regButton}>Зарегистрироваться</Button>
+                                    <Button 
+                                        onClick={handleClickFormClear} 
+                                        variant="outlined">Сбросить</Button>
+                                    <Button
+                                        onClick={handleClickAddNewUser}
+                                        variant="outlined"
+                                        color="primary"
+                                        className={classes.regButton}
+                                        >
+                                            Зарегистрироваться
+                                        </Button>
                                 </Grid>
 
                             </Grid>
