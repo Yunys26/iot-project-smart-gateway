@@ -3,8 +3,10 @@ import {
     TableBody,
     TableCell,
     TableRow,
-} from '@material-ui/core'
-
+} from '@material-ui/core';
+import BlockIcon from '@material-ui/icons/Block';
+import CheckIcon from '@material-ui/icons/Check';
+import Moment from 'react-moment';
 import { useDispatch, useSelector } from 'react-redux'
 import { concatsArrData } from '../../store/sliceStore/mainSlice';
 
@@ -20,6 +22,8 @@ export default function TableBodyUsers({ data }) {
 
     // console.log(con)
 
+    const date = new Date()
+
     return (
         <TableBody>
             {(data === undefined && '') || data.map((el) => {
@@ -30,32 +34,12 @@ export default function TableBodyUsers({ data }) {
                         <TableCell>{el.surname}</TableCell>
                         <TableCell>{el.position}</TableCell>
                         <TableCell>{el.gender}</TableCell>
-                        <TableCell>{el.birthday}</TableCell>
+                        <TableCell><Moment format="YYYY/MM/DD">{el.birthday}</Moment></TableCell>
                         <TableCell>{el.card_id}</TableCell>
-                        <TableCell>{el.inside}</TableCell>
+                        <TableCell>{(el.inside === false && <BlockIcon style={{color: 'red'}} />) || <CheckIcon style={{color: 'green'}}/>}</TableCell>
                     </TableRow>
                 )
             })}
-            {/* <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>Алиев</TableCell>
-                <TableCell>Юнус</TableCell>
-                <TableCell>Алиевич</TableCell>
-                <TableCell>Генеральный директор</TableCell>
-                <TableCell>26.03.2000</TableCell>
-                <TableCell>18912</TableCell>
-                <TableCell>Да</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell>2</TableCell>
-                <TableCell>Крутяков</TableCell>
-                <TableCell>Антон</TableCell>
-                <TableCell>Викторович</TableCell>
-                <TableCell>Генеральный директор</TableCell>
-                <TableCell>30.01.1999</TableCell>
-                <TableCell>11912</TableCell>
-                <TableCell>Да</TableCell>
-            </TableRow> */}
         </TableBody>
     );
 }

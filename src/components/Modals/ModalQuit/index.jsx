@@ -2,11 +2,13 @@ import React from 'react';
 import {
     Modal,
     Backdrop,
-    Fade
+    Fade,
+    Button
 } from '@material-ui/core';
 import { useStyles } from './style';
 import { useSelector } from 'react-redux';
 import { changeModalQuitState } from '../../../store/sliceStore/modalsSlice';
+import { useHistory } from 'react-router-dom';
 
 export default function ModalQuit ({ dispatch }) {
 
@@ -15,6 +17,11 @@ export default function ModalQuit ({ dispatch }) {
     const modalState = useSelector(state => state.modals.modalsQuitStore);
 
     const handleClose = () => dispatch(changeModalQuitState(false));
+    
+    const handleClickClose = React.useCallback(() => {
+        window.close();
+        localStorage.clear();
+    })
 
     return (
         <Modal
@@ -31,8 +38,8 @@ export default function ModalQuit ({ dispatch }) {
         >
             <Fade in={modalState}>
                 <div className={classes.paper}>
-                    <h2 id="transition-modal-title">Modal Quit</h2>
-                    <p id="transition-modal-description">Quit User</p>
+                    <Button onClick={handleClose}>Отмена</Button>
+                    <Button onClick={handleClickClose}>Выход</Button>
                 </div>
             </Fade>
         </Modal>

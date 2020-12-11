@@ -11,10 +11,10 @@ export default function TableHeadUsers (props) {
         <TableHead>
             <TableRow>
                 <TableCell>ID</TableCell>
-                <TableCell>Фамилия</TableCell>
                 <TableCell>Имя</TableCell>
-                <TableCell>Пол</TableCell>
+                <TableCell>Фамилия</TableCell>
                 <TableCell>Должность</TableCell>
+                <TableCell>Пол</TableCell>
                 <TableCell>Дата рождения</TableCell>
                 <TableCell>ID карты</TableCell>
                 <TableCell>В помещении</TableCell>

@@ -25,6 +25,34 @@ export const responseAddAdmin = createAsyncThunk('main/responseAddAdmin',
     }
 )
 
+export const responseAddNewUser = createAsyncThunk('main/responseAddAdmin', 
+    ([name, surname, position, menCheck, womenCheck, birthday, idCard ,token]) => {
+        const data = JSON.stringify({
+            name: name,
+            surname: surname,
+            position: position,
+            gender: ((menCheck === true && "Мужской" ) || (womenCheck === true && "Женский")),
+            birthday: birthday,
+            card_id: idCard
+        })
+
+        const config = {
+            method: 'POST',
+            url: 'https://gavnishe.tk/v1/iot/users/upsert',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        const response = axios(config)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        console.log(response)
+    }
+)
+
 const modalsSlice = createSlice({
     name: 'modals',
 
@@ -88,6 +116,15 @@ const modalsSlice = createSlice({
             console.log('223')
         },
         [responseAddAdmin.rejected]: (state) => {
+            console.log('2224')
+        },
+        [responseAddNewUser.fulfilled]: (state) => {
+            console.log('221')
+        },
+        [responseAddNewUser.pending]: (state, ) => {
+            console.log('223')
+        },
+        [responseAddNewUser.rejected]: (state) => {
             console.log('2224')
         },
     }

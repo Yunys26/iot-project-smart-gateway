@@ -35,6 +35,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
 
   const dataFormSignIn = useSelector(state => state.main.dataFormSignIn);
+  const token = useSelector(state => state.main.token);
 
   // Стили
   const classes = useStyles();
@@ -75,6 +76,7 @@ export default function SignIn() {
     
     if (remeberMe === true && dataFormSignIn === 'next') {
       localStorage.setItem('regUser', result)
+      // localStorage.setItem('token', token)
       history.push('/menu');
     } else if (remeberMe === false && dataFormSignIn === 'next') {
       history.push('/menu');
